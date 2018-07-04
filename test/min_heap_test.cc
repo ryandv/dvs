@@ -14,7 +14,7 @@ namespace {
     };
 }
 
-TEST_F(MinHeapTest, min_heapify_left_subtree)
+TEST_F(MinHeapTest, array_min_heapify_left_subtree)
 {
     int h[] = { 3, 1, 2 };
     min_heapify_array(3, &h[0], 0);
@@ -23,7 +23,7 @@ TEST_F(MinHeapTest, min_heapify_left_subtree)
     ASSERT_EQ(h[2], 2);
 }
 
-TEST_F(MinHeapTest, min_heapify_array_right)
+TEST_F(MinHeapTest, array_min_heapify_array_right)
 {
     int h[] = { 3, 2, 1 };
     min_heapify_array(3, &h[0], 0);
@@ -32,7 +32,7 @@ TEST_F(MinHeapTest, min_heapify_array_right)
     ASSERT_EQ(h[2], 3);
 }
 
-TEST_F(MinHeapTest, min_heapify_array_recursive)
+TEST_F(MinHeapTest, array_min_heapify_array_recursive)
 {
     int h[] = { 10, 1, 999, 2, 3 };
     min_heapify_array(4, &h[0], 0);
@@ -43,7 +43,7 @@ TEST_F(MinHeapTest, min_heapify_array_recursive)
     ASSERT_EQ(h[4], 3);
 }
 
-TEST_F(MinHeapTest, build_min_heap_singleton)
+TEST_F(MinHeapTest, array_build_min_heap_singleton)
 {
     int input[] = { 1 };
     int *built_heap = build_min_heap(1, &input[0]);
@@ -51,7 +51,7 @@ TEST_F(MinHeapTest, build_min_heap_singleton)
     free(built_heap);
 }
 
-TEST_F(MinHeapTest, build_complete_min_heap)
+TEST_F(MinHeapTest, array_build_complete_min_heap)
 {
     int input[] = { 5, 3, 1 };
     int *built_heap = build_min_heap(3, &input[0]);
