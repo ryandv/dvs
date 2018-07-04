@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <vector>
+
 #include "gtest/gtest.h"
 
 #include "dvs/min_heap.h"
@@ -45,5 +48,15 @@ TEST_F(MinHeapTest, build_min_heap_singleton)
     int input[] = { 1 };
     int *built_heap = build_min_heap(1, &input[0]);
     ASSERT_EQ(built_heap[0], 1);
+    free(built_heap);
+}
+
+TEST_F(MinHeapTest, build_complete_min_heap)
+{
+    int input[] = { 5, 3, 1 };
+    int *built_heap = build_min_heap(3, &input[0]);
+    ASSERT_EQ(built_heap[0], 1);
+    ASSERT_EQ(built_heap[1], 3);
+    ASSERT_EQ(built_heap[2], 5);
     free(built_heap);
 }

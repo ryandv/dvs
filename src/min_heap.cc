@@ -32,7 +32,7 @@ int *build_min_heap(int num_elements, int *elements)
 {
         int *ret = (int *) malloc(sizeof(int) * num_elements);
 
-        for (int i = num_elements / 2; i > 0; ++i) {
+        for (int i = num_elements / 2; i >= 0; --i) {
                 min_heapify_array(num_elements, elements, i);
         }
 

@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.11)
 enable_testing()
 
 set(PROJECT_TEST_NAME dvs_test)
+set(CMAKE_BUILD_TYPE Debug)
 
 file(GLOB TEST_SRC_FILES *.cc)
 
