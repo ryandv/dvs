@@ -1,0 +1,16 @@
+*.swp
+
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles/
+CTestTestfile.cmake
+Makefile
+
+local/
+
+test/Testing
+test/acceptance
+Testing/
+
+ext/gtest/src
+ext/gtest/tmp
