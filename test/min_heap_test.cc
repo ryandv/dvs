@@ -14,7 +14,7 @@ namespace {
     };
 }
 
-TEST_F(MinHeapTest, vec_build_min_heap_left_subtree)
+TEST_F(MinHeapTest, build_min_heap_left_subtree)
 {
     std::vector<int> h = { 3, 1, 2 };
     Heap heap = Heap(h);
@@ -23,7 +23,7 @@ TEST_F(MinHeapTest, vec_build_min_heap_left_subtree)
     ASSERT_EQ(heap.at(2), 2);
 }
 
-TEST_F(MinHeapTest, vec_build_min_heap_right_subtree)
+TEST_F(MinHeapTest, build_min_heap_right_subtree)
 {
     std::vector<int> h = { 3, 2, 1 };
     Heap heap = Heap(h);
@@ -32,7 +32,7 @@ TEST_F(MinHeapTest, vec_build_min_heap_right_subtree)
     ASSERT_EQ(heap.at(2), 3);
 }
 
-TEST_F(MinHeapTest, vec_build_min_heap_recursive)
+TEST_F(MinHeapTest, build_min_heap_recursive)
 {
     std::vector<int> h = { 10, 1, 999, 2, 3 };
     Heap heap = Heap(h);
@@ -43,14 +43,14 @@ TEST_F(MinHeapTest, vec_build_min_heap_recursive)
     ASSERT_EQ(heap.at(4), 3);
 }
 
-TEST_F(MinHeapTest, vec_build_min_heap_singleton)
+TEST_F(MinHeapTest, build_min_heap_singleton)
 {
     std::vector<int> h = { 1 };
     Heap heap = Heap(h);
     ASSERT_EQ(heap.at(0), 1);
 }
 
-TEST_F(MinHeapTest, vec_build_complete_min_heap)
+TEST_F(MinHeapTest, build_full_min_heap)
 {
     std::vector<int> h = { 5, 3, 1 };
     Heap heap = Heap(h);

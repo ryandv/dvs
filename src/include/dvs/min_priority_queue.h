@@ -2,17 +2,19 @@
 #define __MIN_PRIORITY_QUEUE_H__
 
 #include <cassert>
+#include <vector>
 
-void set_key(int *pq_as_array, int i, int k)
+template <typename T>
+void set_key(std::vector<T> &pq_as_vec, int i, int k)
 {
-    assert(k <= pq_as_array[i]);
-    pq_as_array[i] = k;
+    assert(k <= pq_as_vec.at(i));
+    pq_as_vec.at(i) = k;
     int parent_index = (i - 1) / 2;
 
-    while (i > 0 && pq_as_array[parent_index] > pq_as_array[i]) {
-        int tmp = pq_as_array[parent_index];
-        pq_as_array[parent_index] = pq_as_array[i];
-        pq_as_array[i] = tmp;
+    while (i > 0 && pq_as_vec.at(parent_index) > pq_as_vec.at(i)) {
+        int tmp = pq_as_vec.at(parent_index);
+        pq_as_vec.at(parent_index) = pq_as_vec.at(i);
+        pq_as_vec.at(i) = tmp;
         i = (i - 1) / 2;
         parent_index =  (i - 1) / 2;
     }
