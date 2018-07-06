@@ -46,14 +46,14 @@ TEST_F(MinHeapTest, vec_min_heapify_vec_recursive)
 TEST_F(MinHeapTest, vec_build_min_heap_singleton)
 {
     std::vector<int> input = { 1 };
-    Heap h = build_min_heap(1, input);
+    Heap h = Heap(input);
     ASSERT_EQ(h.at(0), 1);
 }
 
 TEST_F(MinHeapTest, vec_build_complete_min_heap)
 {
     std::vector<int> input = { 5, 3, 1 };
-    Heap h = build_min_heap(3, input);
+    Heap h = Heap(input);
     ASSERT_EQ(h.at(0), 1);
     ASSERT_EQ(h.at(1), 3);
     ASSERT_EQ(h.at(2), 5);

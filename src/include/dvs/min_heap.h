@@ -4,20 +4,6 @@
 #include <vector>
 
 template <typename T>
-class Heap
-{
-    public:
-        Heap() : heapVec (std::vector<T>()) { }
-        Heap(const std::vector<T> &elements) : heapVec (std::vector<T>(elements)) { }
-        T at(int index)
-        {
-            return heapVec.at(index);
-        }
-    private:
-        std::vector<T> heapVec;
-};
-
-template <typename T>
 void min_heapify_vec(int len, std::vector<T> &heap_as_vec, int root_index)
 {
         int smallest_index;
@@ -44,15 +30,30 @@ void min_heapify_vec(int len, std::vector<T> &heap_as_vec, int root_index)
 }
 
 template <typename T>
-Heap<T> build_min_heap(int num_elements, const std::vector<T> &elements)
+class Heap
 {
-        std::vector<T> ret = std::vector<T>(elements);
-
-        for (int i = num_elements / 2; i >= 0; --i) {
-                min_heapify_vec(num_elements, ret, i);
+    public:
+        Heap() : heapVec (std::vector<T>()) { }
+        Heap(const std::vector<T> &elements) : heapVec (build_min_heap_vec(elements)) {
         }
+        T at(int index)
+        {
+            return heapVec.at(index);
+        }
+    private:
+        std::vector<T> heapVec;
 
-        return Heap<T>(ret);
-}
+        std::vector<T> build_min_heap_vec(const std::vector<T> &elements)
+        {
+            int num_elements = elements.size();
+            std::vector<T> ret = std::vector<T>(elements);
+
+            for (int i = num_elements / 2; i >= 0; --i) {
+                min_heapify_vec(num_elements, ret, i);
+            }
+
+            return ret;
+        }
+};
 
 #endif
