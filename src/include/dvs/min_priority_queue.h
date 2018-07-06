@@ -1,5 +1,5 @@
-#ifndef __MIN_HEAP_H__
-#define __MIN_HEAP_H__
+#ifndef __MIN_PRIORITY_QUEUE_H__
+#define __MIN_PRIORITY_QUEUE_H__
 
 #include <cassert>
 
