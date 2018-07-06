@@ -43,7 +43,7 @@ class Heap
             return heap_vec.at(index);
         }
 
-        void set_key(int i, int k)
+        void set_key(int i, T k)
         {
             assert(k <= heap_vec.at(i));
 
@@ -59,9 +59,20 @@ class Heap
             }
         }
 
+        void insert(T val)
+        {
+            heap_vec.push_back(val);
+            set_key(heap_vec.size() - 1, val);
+        }
+
         std::size_t size()
         {
             return heap_vec.size();
+        }
+
+        T min()
+        {
+            return heap_vec.at(0);
         }
     private:
         std::vector<T> heap_vec;

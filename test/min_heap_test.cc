@@ -102,10 +102,17 @@ TEST_F(MinHeapTest, set_key_recursive_right_subtree)
 
 TEST_F(MinHeapTest, insert_singleton)
 {
+    Heap<int> heap;
+    heap.insert(42);
+    ASSERT_EQ(heap.at(0), 42);
+    ASSERT_EQ(heap.size(), 1);
 }
 
 TEST_F(MinHeapTest, minimum)
 {
+    Heap heap = Heap(std::vector<int> { 5, 4, 3, 2, 1 });
+    int min = heap.min();
+    ASSERT_EQ(min, 1);
 }
 
 TEST_F(MinHeapTest, extract_min)
