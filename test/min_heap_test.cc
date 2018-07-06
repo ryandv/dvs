@@ -110,11 +110,20 @@ TEST_F(MinHeapTest, insert_singleton)
 
 TEST_F(MinHeapTest, minimum)
 {
-    Heap heap = Heap(std::vector<int> { 5, 4, 3, 2, 1 });
+    Heap heap = Heap(std::vector<int> { 1, 2, 3, 4, 5, 6, 7 });
     int min = heap.min();
     ASSERT_EQ(min, 1);
 }
 
 TEST_F(MinHeapTest, extract_min)
 {
+    Heap heap = Heap(std::vector<int> { 1, 2, 3, 4, 5, 6, 7 });
+    int min = heap.extract_min();
+    ASSERT_EQ(min, 1);
+    ASSERT_EQ(heap.at(0), 2);
+    ASSERT_EQ(heap.at(1), 4);
+    ASSERT_EQ(heap.at(2), 3);
+    ASSERT_EQ(heap.at(3), 7);
+    ASSERT_EQ(heap.at(4), 5);
+    ASSERT_EQ(heap.at(5), 6);
 }

@@ -74,6 +74,17 @@ class Heap
         {
             return heap_vec.at(0);
         }
+
+        T extract_min()
+        {
+            int last_index = heap_vec.size() - 1;
+            T tmp = heap_vec.at(0);
+            heap_vec.at(0) = heap_vec.at(last_index);
+            heap_vec.at(last_index) = tmp;
+            heap_vec.pop_back();
+            min_heapify_vec(heap_vec.size(), heap_vec, 0);
+            return tmp;
+        }
     private:
         std::vector<T> heap_vec;
 
