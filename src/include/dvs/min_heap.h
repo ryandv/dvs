@@ -2,6 +2,7 @@
 #define __MIN_HEAP_H__
 
 #include <cassert>
+#include <cstdlib>
 #include <vector>
 
 template <typename T>
@@ -35,9 +36,7 @@ class Heap
 {
     public:
         Heap() : heap_vec (std::vector<T>()) { }
-
-        Heap(const std::vector<T> &elements) : heap_vec (build_min_heap_vec(elements)) {
-        }
+        Heap(const std::vector<T> &elements) : heap_vec (build_min_heap_vec(elements)) { }
 
         T at(int index)
         {
@@ -58,6 +57,11 @@ class Heap
                 i = (i - 1) / 2;
                 parent_index =  (i - 1) / 2;
             }
+        }
+
+        std::size_t size()
+        {
+            return heap_vec.size();
         }
     private:
         std::vector<T> heap_vec;

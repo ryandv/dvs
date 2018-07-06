@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdexcept>
 #include <vector>
 
 #include "gtest/gtest.h"
@@ -12,6 +13,13 @@ namespace {
             {
             }
     };
+}
+
+TEST_F(MinHeapTest, build_empty_min_heap)
+{
+    Heap<int> heap;
+    ASSERT_EQ(heap.size(), 0);
+    EXPECT_THROW(heap.at(0), std::out_of_range);
 }
 
 TEST_F(MinHeapTest, build_min_heap_left_subtree)
