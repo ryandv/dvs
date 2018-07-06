@@ -14,49 +14,47 @@ namespace {
     };
 }
 
-TEST_F(MinHeapTest, array_min_heapify_left_subtree)
+TEST_F(MinHeapTest, vec_min_heapify_left_subtree)
 {
-    int h[] = { 3, 1, 2 };
-    min_heapify_array(3, &h[0], 0);
-    ASSERT_EQ(h[0], 1);
-    ASSERT_EQ(h[1], 3);
-    ASSERT_EQ(h[2], 2);
+    std::vector<int> h = { 3, 1, 2 };
+    min_heapify_vec(3, h, 0);
+    ASSERT_EQ(h.at(0), 1);
+    ASSERT_EQ(h.at(1), 3);
+    ASSERT_EQ(h.at(2), 2);
 }
 
-TEST_F(MinHeapTest, array_min_heapify_array_right)
+TEST_F(MinHeapTest, vec_min_heapify_vec_right)
 {
-    int h[] = { 3, 2, 1 };
-    min_heapify_array(3, &h[0], 0);
-    ASSERT_EQ(h[0], 1);
-    ASSERT_EQ(h[1], 2);
-    ASSERT_EQ(h[2], 3);
+    std::vector<int> h = { 3, 2, 1 };
+    min_heapify_vec(3, h, 0);
+    ASSERT_EQ(h.at(0), 1);
+    ASSERT_EQ(h.at(1), 2);
+    ASSERT_EQ(h.at(2), 3);
 }
 
-TEST_F(MinHeapTest, array_min_heapify_array_recursive)
+TEST_F(MinHeapTest, vec_min_heapify_vec_recursive)
 {
-    int h[] = { 10, 1, 999, 2, 3 };
-    min_heapify_array(4, &h[0], 0);
-    ASSERT_EQ(h[0], 1);
-    ASSERT_EQ(h[1], 2);
-    ASSERT_EQ(h[2], 999);
-    ASSERT_EQ(h[3], 10);
-    ASSERT_EQ(h[4], 3);
+    std::vector<int> h = { 10, 1, 999, 2, 3 };
+    min_heapify_vec(4, h, 0);
+    ASSERT_EQ(h.at(0), 1);
+    ASSERT_EQ(h.at(1), 2);
+    ASSERT_EQ(h.at(2), 999);
+    ASSERT_EQ(h.at(3), 10);
+    ASSERT_EQ(h.at(4), 3);
 }
 
-TEST_F(MinHeapTest, array_build_min_heap_singleton)
+TEST_F(MinHeapTest, vec_build_min_heap_singleton)
 {
-    int input[] = { 1 };
-    int *built_heap = build_min_heap(1, &input[0]);
-    ASSERT_EQ(built_heap[0], 1);
-    free(built_heap);
+    std::vector<int> input = { 1 };
+    Heap h = build_min_heap(1, input);
+    ASSERT_EQ(h.at(0), 1);
 }
 
-TEST_F(MinHeapTest, array_build_complete_min_heap)
+TEST_F(MinHeapTest, vec_build_complete_min_heap)
 {
-    int input[] = { 5, 3, 1 };
-    int *built_heap = build_min_heap(3, &input[0]);
-    ASSERT_EQ(built_heap[0], 1);
-    ASSERT_EQ(built_heap[1], 3);
-    ASSERT_EQ(built_heap[2], 5);
-    free(built_heap);
+    std::vector<int> input = { 5, 3, 1 };
+    Heap h = build_min_heap(3, input);
+    ASSERT_EQ(h.at(0), 1);
+    ASSERT_EQ(h.at(1), 3);
+    ASSERT_EQ(h.at(2), 5);
 }

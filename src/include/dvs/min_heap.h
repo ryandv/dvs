@@ -1,44 +1,58 @@
 #ifndef __MIN_HEAP_H__
 #define __MIN_HEAP_H__
 
+#include <vector>
+
 template <typename T>
-void min_heapify_array(int len, T *heap_as_array, int root_index)
+class Heap
+{
+    public:
+        Heap() : heapVec (std::vector<T>()) { }
+        Heap(const std::vector<T> &elements) : heapVec (std::vector<T>(elements)) { }
+        T at(int index)
+        {
+            return heapVec.at(index);
+        }
+    private:
+        std::vector<T> heapVec;
+};
+
+template <typename T>
+void min_heapify_vec(int len, std::vector<T> &heap_as_vec, int root_index)
 {
         int smallest_index;
         int left_index = 2 * root_index + 1;
         int right_index = 2 * root_index + 2;
 
-        if (left_index < len && heap_as_array[left_index] < heap_as_array[root_index]) {
+        if (left_index < len && heap_as_vec.at(left_index) < heap_as_vec.at(root_index)) {
                 smallest_index = left_index;
         } else {
                 smallest_index = root_index;
         }
 
-        if (right_index < len && heap_as_array[right_index] < heap_as_array[smallest_index]) {
+        if (right_index < len && heap_as_vec.at(right_index) < heap_as_vec.at(smallest_index)) {
                 smallest_index = right_index;
         }
 
         if (smallest_index != root_index) {
-                T tmp = heap_as_array[root_index];
-                heap_as_array[root_index] = heap_as_array[smallest_index];
-                heap_as_array[smallest_index] = tmp;
+                T tmp = heap_as_vec.at(root_index);
+                heap_as_vec.at(root_index) = heap_as_vec.at(smallest_index);
+                heap_as_vec.at(smallest_index) = tmp;
 
-                min_heapify_array(len, heap_as_array, smallest_index);
+                min_heapify_vec(len, heap_as_vec, smallest_index);
         }
 }
 
 template <typename T>
-T *build_min_heap(int num_elements, T *elements)
+Heap<T> build_min_heap(int num_elements, const std::vector<T> &elements)
 {
-        T *ret = (T *) malloc(sizeof(T) * num_elements);
+        std::vector<T> ret = std::vector<T>(elements);
 
         for (int i = num_elements / 2; i >= 0; --i) {
-                min_heapify_array(num_elements, elements, i);
+                min_heapify_vec(num_elements, ret, i);
         }
 
-        memcpy((void *) ret, (void *) elements, sizeof(T) * num_elements);
-
-        return ret;
+        return Heap<T>(ret);
 }
 
 #endif
