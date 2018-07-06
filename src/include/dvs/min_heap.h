@@ -5,22 +5,6 @@
 #include <vector>
 
 template <typename T>
-void set_key(std::vector<T> &pq_as_vec, int i, int k)
-{
-    assert(k <= pq_as_vec.at(i));
-    pq_as_vec.at(i) = k;
-    int parent_index = (i - 1) / 2;
-
-    while (i > 0 && pq_as_vec.at(parent_index) > pq_as_vec.at(i)) {
-        int tmp = pq_as_vec.at(parent_index);
-        pq_as_vec.at(parent_index) = pq_as_vec.at(i);
-        pq_as_vec.at(i) = tmp;
-        i = (i - 1) / 2;
-        parent_index =  (i - 1) / 2;
-    }
-}
-
-template <typename T>
 void min_heapify_vec(int len, std::vector<T> &heap_as_vec, int root_index)
 {
         int smallest_index;
@@ -50,15 +34,33 @@ template <typename T>
 class Heap
 {
     public:
-        Heap() : heapVec (std::vector<T>()) { }
-        Heap(const std::vector<T> &elements) : heapVec (build_min_heap_vec(elements)) {
+        Heap() : heap_vec (std::vector<T>()) { }
+
+        Heap(const std::vector<T> &elements) : heap_vec (build_min_heap_vec(elements)) {
         }
+
         T at(int index)
         {
-            return heapVec.at(index);
+            return heap_vec.at(index);
+        }
+
+        void set_key(int i, int k)
+        {
+            assert(k <= heap_vec.at(i));
+
+            heap_vec.at(i) = k;
+            int parent_index = (i - 1) / 2;
+
+            while (i > 0 && heap_vec.at(parent_index) > heap_vec.at(i)) {
+                int tmp = heap_vec.at(parent_index);
+                heap_vec.at(parent_index) = heap_vec.at(i);
+                heap_vec.at(i) = tmp;
+                i = (i - 1) / 2;
+                parent_index =  (i - 1) / 2;
+            }
         }
     private:
-        std::vector<T> heapVec;
+        std::vector<T> heap_vec;
 
         std::vector<T> build_min_heap_vec(const std::vector<T> &elements)
         {
