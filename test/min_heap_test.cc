@@ -14,47 +14,47 @@ namespace {
     };
 }
 
-TEST_F(MinHeapTest, vec_min_heapify_left_subtree)
+TEST_F(MinHeapTest, vec_build_min_heap_left_subtree)
 {
     std::vector<int> h = { 3, 1, 2 };
-    min_heapify_vec(3, h, 0);
-    ASSERT_EQ(h.at(0), 1);
-    ASSERT_EQ(h.at(1), 3);
-    ASSERT_EQ(h.at(2), 2);
+    Heap heap = Heap(h);
+    ASSERT_EQ(heap.at(0), 1);
+    ASSERT_EQ(heap.at(1), 3);
+    ASSERT_EQ(heap.at(2), 2);
 }
 
-TEST_F(MinHeapTest, vec_min_heapify_vec_right)
+TEST_F(MinHeapTest, vec_build_min_heap_right_subtree)
 {
     std::vector<int> h = { 3, 2, 1 };
-    min_heapify_vec(3, h, 0);
-    ASSERT_EQ(h.at(0), 1);
-    ASSERT_EQ(h.at(1), 2);
-    ASSERT_EQ(h.at(2), 3);
+    Heap heap = Heap(h);
+    ASSERT_EQ(heap.at(0), 1);
+    ASSERT_EQ(heap.at(1), 2);
+    ASSERT_EQ(heap.at(2), 3);
 }
 
-TEST_F(MinHeapTest, vec_min_heapify_vec_recursive)
+TEST_F(MinHeapTest, vec_build_min_heap_recursive)
 {
     std::vector<int> h = { 10, 1, 999, 2, 3 };
-    min_heapify_vec(4, h, 0);
-    ASSERT_EQ(h.at(0), 1);
-    ASSERT_EQ(h.at(1), 2);
-    ASSERT_EQ(h.at(2), 999);
-    ASSERT_EQ(h.at(3), 10);
-    ASSERT_EQ(h.at(4), 3);
+    Heap heap = Heap(h);
+    ASSERT_EQ(heap.at(0), 1);
+    ASSERT_EQ(heap.at(1), 2);
+    ASSERT_EQ(heap.at(2), 999);
+    ASSERT_EQ(heap.at(3), 10);
+    ASSERT_EQ(heap.at(4), 3);
 }
 
 TEST_F(MinHeapTest, vec_build_min_heap_singleton)
 {
-    std::vector<int> input = { 1 };
-    Heap h = Heap(input);
-    ASSERT_EQ(h.at(0), 1);
+    std::vector<int> h = { 1 };
+    Heap heap = Heap(h);
+    ASSERT_EQ(heap.at(0), 1);
 }
 
 TEST_F(MinHeapTest, vec_build_complete_min_heap)
 {
-    std::vector<int> input = { 5, 3, 1 };
-    Heap h = Heap(input);
-    ASSERT_EQ(h.at(0), 1);
-    ASSERT_EQ(h.at(1), 3);
-    ASSERT_EQ(h.at(2), 5);
+    std::vector<int> h = { 5, 3, 1 };
+    Heap heap = Heap(h);
+    ASSERT_EQ(heap.at(0), 1);
+    ASSERT_EQ(heap.at(1), 3);
+    ASSERT_EQ(heap.at(2), 5);
 }
