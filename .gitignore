@@ -11,6 +11,7 @@ local/
 
 test/Testing
 test/acceptance
+test/dvs_test
 Testing/
 
 ext/gtest/src
