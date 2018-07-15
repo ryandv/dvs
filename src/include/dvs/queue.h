@@ -22,6 +22,7 @@ class Queue {
     {
         if (queue_vec.empty()) {
             queue_vec.push_back(val);
+            head = 0;
         } else {
             queue_vec.at(tail) = val;
         }
@@ -31,6 +32,19 @@ class Queue {
         } else {
             tail += 1;
         }
+    }
+
+    const T& dequeue()
+    {
+        T val = queue_vec.at(head);
+
+        if (head == size()) {
+            head = 1;
+        } else {
+            head += 1;
+        }
+
+        return val;
     }
 
     private:

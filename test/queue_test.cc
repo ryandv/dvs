@@ -27,3 +27,13 @@ TEST_F(QueueTest, enqueue_increments_size)
     q.enqueue(1);
     ASSERT_EQ(q.size(), 1);
 }
+
+TEST_F(QueueTest, dequeue_decrements_size)
+{
+    Queue<int> q;
+    q.enqueue(1);
+    int head = q.dequeue();
+
+    ASSERT_EQ(head, 1);
+    ASSERT_EQ(q.size(), 0);
+}
