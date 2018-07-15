@@ -20,3 +20,10 @@ TEST_F(QueueTest, build_empty_queue)
     Queue<int> q;
     ASSERT_EQ(q.size(), 0);
 }
+
+TEST_F(QueueTest, enqueue_increments_size)
+{
+    Queue<int> q;
+    q.enqueue(1);
+    ASSERT_EQ(q.size(), 1);
+}
