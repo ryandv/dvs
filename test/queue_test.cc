@@ -37,3 +37,16 @@ TEST_F(QueueTest, dequeue_decrements_size)
     ASSERT_EQ(head, 1);
     ASSERT_EQ(q.size(), 0);
 }
+
+TEST_F(QueueTest, obeys_fifo)
+{
+    Queue<int> q;
+    q.enqueue(1);
+    q.enqueue(2);
+
+    int first = q.dequeue();
+    int second = q.dequeue();
+
+    ASSERT_EQ(first, 1);
+    ASSERT_EQ(second, 2);
+}
