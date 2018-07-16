@@ -1,5 +1,5 @@
-#ifndef __MIN_HEAP_H__
-#define __MIN_HEAP_H__
+#ifndef __QUEUE_H__
+#define __QUEUE_H__
 
 #include <cstdlib>
 #include <vector>
