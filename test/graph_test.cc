@@ -18,5 +18,6 @@ namespace {
 TEST_F(GraphTest, build_empty_graph)
 {
     Graph<int> graph;
+    ASSERT_EQ(graph.get_value(), std::optional<int>());
     ASSERT_EQ(graph.number_of_vertices(), 0);
 }

@@ -12,9 +12,14 @@ class Graph {
     {
     }
 
-    std::size_t number_of_vertices()
+    const std::size_t number_of_vertices()
     {
         return neighbours.size();
+    }
+
+    const std::optional<T> &get_value()
+    {
+        return value;
     }
 
     private:
