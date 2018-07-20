@@ -8,6 +8,9 @@
 template <typename T>
 class BoundedQueue {
     public:
+
+    class BoundedQueueOverflow : public std::exception { };
+
     BoundedQueue()
         : queue_arr(std::unique_ptr<T[]>())
         , head(0)
@@ -34,6 +37,8 @@ class BoundedQueue {
 
     void enqueue(T val)
     {
+        if (head == max_size) { throw BoundedQueueOverflow(); }
+
         (queue_arr.get())[tail] = val;
 
         if (tail == (max_size - 1)) {
