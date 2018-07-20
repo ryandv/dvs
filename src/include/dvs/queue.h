@@ -9,13 +9,17 @@ class Queue {
     public:
     Queue()
         : queue_vec(std::vector<T>())
-        , head(-1)
+        , head(0)
         , tail(0)
     { }
 
     std::size_t size()
     {
-        return queue_vec.size();
+        if (tail < head) {
+            return (tail + queue_vec.capacity()) - head;
+        } else {
+            return tail - head;
+        }
     }
 
     void enqueue(T val)
@@ -34,7 +38,7 @@ class Queue {
         }
     }
 
-    const T& dequeue()
+    const T dequeue()
     {
         T val = queue_vec.at(head);
 
