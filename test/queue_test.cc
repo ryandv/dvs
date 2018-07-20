@@ -4,10 +4,10 @@
 
 #include "gtest/gtest.h"
 
-#include "dvs/queue.h"
+#include "dvs/bounded_queue.h"
 
 namespace {
-    class QueueTest : public ::testing::Test {
+    class BoundedQueueTest : public ::testing::Test {
         protected:
             virtual void SetUp()
             {
@@ -15,22 +15,22 @@ namespace {
     };
 }
 
-TEST_F(QueueTest, build_empty_queue)
+TEST_F(BoundedQueueTest, build_empty_bounded_queue)
 {
-    Queue<int> q;
+    BoundedQueue<int> q;
     ASSERT_EQ(q.size(), 0);
 }
 
-TEST_F(QueueTest, enqueue_increments_size)
+TEST_F(BoundedQueueTest, enqueue_increments_size)
 {
-    Queue<int> q;
+    BoundedQueue<int> q(1);
     q.enqueue(1);
     ASSERT_EQ(q.size(), 1);
 }
 
-TEST_F(QueueTest, dequeue_decrements_size)
+TEST_F(BoundedQueueTest, dequeue_decrements_size)
 {
-    Queue<int> q;
+    BoundedQueue<int> q(1);
     q.enqueue(1);
     int head = q.dequeue();
 
@@ -38,9 +38,9 @@ TEST_F(QueueTest, dequeue_decrements_size)
     ASSERT_EQ(q.size(), 0);
 }
 
-TEST_F(QueueTest, obeys_fifo)
+TEST_F(BoundedQueueTest, obeys_fifo)
 {
-    Queue<int> q;
+    BoundedQueue<int> q(2);
     q.enqueue(1);
     q.enqueue(2);
 
@@ -49,4 +49,12 @@ TEST_F(QueueTest, obeys_fifo)
 
     ASSERT_EQ(first, 1);
     ASSERT_EQ(second, 2);
+}
+
+TEST_F(BoundedQueueTest, raises_error_on_overflow)
+{
+}
+
+TEST_F(BoundedQueueTest, raises_error_on_underflow)
+{
 }

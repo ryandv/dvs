@@ -2,21 +2,31 @@
 #define __QUEUE_H__
 
 #include <cstdlib>
+#include <memory>
 #include <vector>
 
 template <typename T>
-class Queue {
+class BoundedQueue {
     public:
-    Queue()
-        : queue_vec(std::vector<T>())
+    BoundedQueue()
+        : queue_arr(std::unique_ptr<T[]>())
         , head(0)
         , tail(0)
-    { }
+        , max_size(0)
+    {}
+
+    BoundedQueue(unsigned int max_size)
+        : queue_arr(std::unique_ptr<T[]>(new T[max_size]))
+        , head(0)
+        , tail(0)
+        , max_size(max_size)
+    {
+    }
 
     std::size_t size()
     {
         if (tail < head) {
-            return (tail + queue_vec.capacity()) - head;
+            return (tail + max_size - 1) - head;
         } else {
             return tail - head;
         }
@@ -24,14 +34,9 @@ class Queue {
 
     void enqueue(T val)
     {
-        if (queue_vec.empty()) {
-            queue_vec.push_back(val);
-            head = 0;
-        } else {
-            queue_vec.at(tail) = val;
-        }
+        (queue_arr.get())[tail] = val;
 
-        if (tail == queue_vec.size()) {
+        if (tail == (max_size - 1)) {
             tail = 1;
         } else {
             tail += 1;
@@ -40,7 +45,7 @@ class Queue {
 
     const T dequeue()
     {
-        T val = queue_vec.at(head);
+        T val = (queue_arr.get())[head];
 
         if (head == size()) {
             head = 1;
@@ -52,7 +57,8 @@ class Queue {
     }
 
     private:
-        std::vector<T> queue_vec;
+        std::unique_ptr<T[]> queue_arr;
+        unsigned int max_size;
         std::size_t head;
         std::size_t tail;
 };
