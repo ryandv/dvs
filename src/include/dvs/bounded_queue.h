@@ -16,10 +16,11 @@ class BoundedQueue {
         , head(0)
         , tail(0)
         , max_size(0)
-    {}
+    {
+    }
 
     BoundedQueue(unsigned int max_size)
-        : queue_arr(std::unique_ptr<T[]>(new T[max_size]))
+        : queue_arr(std::unique_ptr<T[]>(new T[max_size + 1]))
         , head(0)
         , tail(0)
         , max_size(max_size)
@@ -29,7 +30,7 @@ class BoundedQueue {
     std::size_t size()
     {
         if (tail < head) {
-            return (tail + max_size - 1) - head;
+            return (tail + max_size) - head;
         } else {
             return tail - head;
         }
@@ -37,12 +38,12 @@ class BoundedQueue {
 
     void enqueue(T val)
     {
-        if (head == max_size) { throw BoundedQueueOverflow(); }
+        if (head == tail + 1) { throw BoundedQueueOverflow(); }
 
         (queue_arr.get())[tail] = val;
 
-        if (tail == (max_size - 1)) {
-            tail = 1;
+        if (tail == max_size) {
+            tail = 0;
         } else {
             tail += 1;
         }

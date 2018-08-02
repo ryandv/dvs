@@ -60,3 +60,7 @@ TEST_F(BoundedQueueTest, raises_error_on_overflow)
 TEST_F(BoundedQueueTest, raises_error_on_underflow)
 {
 }
+
+TEST_F(BoundedQueueTest, something_wraparound)
+{
+}
