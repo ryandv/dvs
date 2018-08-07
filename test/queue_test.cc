@@ -51,11 +51,13 @@ TEST_F(BoundedQueueTest, obeys_fifo)
     ASSERT_EQ(second, 2);
 }
 
+/*
 TEST_F(BoundedQueueTest, raises_error_on_overflow)
 {
     BoundedQueue<int> q;
     EXPECT_THROW(q.enqueue(1), BoundedQueue<int>::BoundedQueueOverflow);
 }
+*/
 
 TEST_F(BoundedQueueTest, raises_error_on_underflow)
 {

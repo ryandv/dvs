@@ -27,10 +27,11 @@ class BoundedQueue {
     {
     }
 
-    std::size_t size()
+    int size()
     {
-        if (tail < head) {
-            return (tail + max_size) - head;
+        if (tail <= head) {
+            int size = (tail + max_size) - head - 1;
+            return size < 0 ? 0 : size;
         } else {
             return tail - head;
         }
@@ -65,8 +66,8 @@ class BoundedQueue {
     private:
         std::unique_ptr<T[]> queue_arr;
         unsigned int max_size;
-        std::size_t head;
-        std::size_t tail;
+        int head;
+        int tail;
 };
 
 #endif
