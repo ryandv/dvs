@@ -1,6 +1,7 @@
 #ifndef __GRAPH_H__
 #define __GRAPH_H__
 
+#include <memory>
 #include <optional>
 #include <vector>
 
@@ -8,7 +9,7 @@ template <typename T>
 class Graph {
     public:
         Graph() : value(std::optional<T>())
-                , neighbours (std::vector<T>())
+                , neighbours (std::vector<std::shared_ptr<Graph<T>>>())
     {
     }
 
@@ -24,7 +25,7 @@ class Graph {
 
     private:
         std::optional<T> value;
-        std::vector<T> neighbours;
+        std::vector<std::shared_ptr<Graph<T>>> neighbours;
 };
 
 #endif
