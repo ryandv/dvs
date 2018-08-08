@@ -8,29 +8,48 @@
 template <typename T>
 class Graph {
     public:
-        Graph() : value(std::optional<T>())
-                , neighbours (std::vector<std::shared_ptr<Graph<T>>>())
+        class GraphVertex
+        {
+            public:
+            GraphVertex() : key(-1)
+                        , value(std::optional<T>())
+            {
+            }
+
+            GraphVertex(int key, T value) : key(key)
+                                        , value(std::optional<T>(value))
+            {
+            }
+
+            private:
+
+            int key;
+            std::optional<T> value;
+        };
+
+    Graph() : vertices (std::vector<GraphVertex>())
+            , edges (std::vector<std::pair<int, int>>())
+    {
+    }
+
+    Graph(std::vector<GraphVertex> vertices, std::vector<std::pair<int, int>> edges) : vertices (vertices)
+                                                                                     , edges (edges)
     {
     }
 
     const std::size_t number_of_vertices()
     {
-        return neighbours.size();
+        return vertices.size();
     }
 
-    const std::optional<T> &get_value()
+    const std::vector<GraphVertex> &get_vertices()
     {
-        return value;
-    }
-
-    const std::vector<std::shared_ptr<Graph<T>>> &get_vertices()
-    {
-        return neighbours;
+        return vertices;
     }
 
     private:
-        std::optional<T> value;
-        std::vector<std::shared_ptr<Graph<T>>> neighbours;
+        std::vector<std::pair<int, int>> edges;
+        std::vector<GraphVertex> vertices;
 };
 
 #endif
