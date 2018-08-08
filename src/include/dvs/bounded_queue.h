@@ -2,6 +2,7 @@
 #define __QUEUE_H__
 
 #include <cstdlib>
+#include <cmath>
 #include <memory>
 #include <vector>
 
@@ -9,10 +10,15 @@ template <typename T>
 class BoundedQueue {
     public:
 
-    class BoundedQueueOverflow : public std::exception { };
+    class BoundedQueueOverflow : public std::exception {
+        const char *what() const noexcept override
+        {
+            return "Bounded queue overflow";
+        }
+    };
 
     BoundedQueue()
-        : queue_arr(std::unique_ptr<T[]>())
+        : queue_arr(std::unique_ptr<T[]>(new T[1]))
         , head(0)
         , tail(0)
         , max_size(0)
@@ -31,7 +37,7 @@ class BoundedQueue {
     {
         if (tail <= head) {
             int size = (tail + max_size) - head - 1;
-            return size < 0 ? 0 : size;
+            return fmax(size, 0);
         } else {
             return tail - head;
         }
@@ -39,7 +45,7 @@ class BoundedQueue {
 
     void enqueue(T val)
     {
-        if (head == tail + 1) { throw BoundedQueueOverflow(); }
+        if (max_size == 0 || head == ((tail + 1) % (max_size + 1))) { throw BoundedQueueOverflow(); }
 
         (queue_arr.get())[tail] = val;
 
