@@ -23,6 +23,11 @@ class Graph {
         return value;
     }
 
+    const std::vector<std::shared_ptr<Graph<T>>> &get_vertices()
+    {
+        return neighbours;
+    }
+
     private:
         std::optional<T> value;
         std::vector<std::shared_ptr<Graph<T>>> neighbours;
