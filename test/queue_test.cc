@@ -64,8 +64,18 @@ TEST_F(BoundedQueueTest, raises_error_on_overflow)
     EXPECT_THROW(q.enqueue(2), BoundedQueue<int>::BoundedQueueOverflow);
 }
 
+TEST_F(BoundedQueueTest, empty_queue_raises_error_on_underflow)
+{
+    BoundedQueue<int> q;
+    EXPECT_THROW(q.dequeue(), BoundedQueue<int>::BoundedQueueUnderflow);
+}
+
 TEST_F(BoundedQueueTest, raises_error_on_underflow)
 {
+    BoundedQueue<int> q(1);
+    q.enqueue(1);
+    q.dequeue();
+    EXPECT_THROW(q.dequeue(), BoundedQueue<int>::BoundedQueueUnderflow);
 }
 
 TEST_F(BoundedQueueTest, something_wraparound)

@@ -17,6 +17,13 @@ class BoundedQueue {
         }
     };
 
+    class BoundedQueueUnderflow : public std::exception {
+        const char *what() const noexcept override
+        {
+            return "Bounded queue underflow";
+        }
+    };
+
     BoundedQueue()
         : queue_arr(std::unique_ptr<T[]>(new T[1]))
         , head(0)
@@ -58,6 +65,8 @@ class BoundedQueue {
 
     const T dequeue()
     {
+        if (head == tail) { throw BoundedQueueUnderflow(); }
+
         T val = (queue_arr.get())[head];
 
         if (head == size()) {
