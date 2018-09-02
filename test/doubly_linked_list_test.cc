@@ -37,6 +37,6 @@ TEST_F(DoublyLinkedListTest, search_list)
     l.insert(1);
     l.insert(2);
     l.insert(3);
-    ASSERT_EQ(l.search(2), std::optional<int>(2));
+    ASSERT_EQ(l.search(2)->data(), 2);
     ASSERT_EQ(l.search(999), std::nullopt);
 }

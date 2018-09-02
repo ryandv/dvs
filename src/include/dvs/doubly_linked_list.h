@@ -69,7 +69,7 @@ class DoublyLinkedList {
             new_head->prev = nullptr;
         }
 
-        std::optional<T> search(T search_data)
+        std::optional<DoublyLinkedNode> search(T search_data)
         {
             std::optional<DoublyLinkedNode> node = head();
 
@@ -78,7 +78,7 @@ class DoublyLinkedList {
             }
 
             if (node) {
-                return std::optional<T>(node->data());
+                return node;
             } else {
                 return std::nullopt;
             }
