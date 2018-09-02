@@ -13,10 +13,20 @@ class DoublyLinkedList {
                 {
                     return m_data;
                 }
+
+                const std::optional<DoublyLinkedNode> rest() const
+                {
+                    if (m_rest) {
+                        return *m_rest;
+                    } else {
+                        return std::nullopt;
+                    }
+                }
+
             private:
                 friend void DoublyLinkedList::insert(T);
                 T m_data;
-                std::shared_ptr<DoublyLinkedNode> rest;
+                std::shared_ptr<DoublyLinkedNode> m_rest;
                 std::shared_ptr<DoublyLinkedNode> prev;
         };
 
@@ -50,13 +60,28 @@ class DoublyLinkedList {
             std::shared_ptr<DoublyLinkedNode> new_head(new DoublyLinkedNode());
             new_head->m_data = data;
 
-            new_head->rest = m_head;
+            new_head->m_rest = m_head;
             if (m_head) {
                 m_head->prev = new_head;
             }
 
             m_head = new_head;
             new_head->prev = nullptr;
+        }
+
+        std::optional<T> search(T search_data)
+        {
+            std::optional<DoublyLinkedNode> node = head();
+
+            while (node && node->data() != search_data) {
+                node = node->rest();
+            }
+
+            if (node) {
+                return std::optional<T>(node->data());
+            } else {
+                return std::nullopt;
+            }
         }
 };
 

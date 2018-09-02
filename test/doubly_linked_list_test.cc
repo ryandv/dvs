@@ -28,3 +28,15 @@ TEST_F(DoublyLinkedListTest, insert_at_head_of_linked_list)
     ASSERT_EQ(l.size(), 1);
     ASSERT_EQ(l.head().value().data(), 1);
 }
+
+TEST_F(DoublyLinkedListTest, search_list)
+{
+    // TODO: test search at start/end of list
+    // TODO: test search on empty list
+    DoublyLinkedList<int> l;
+    l.insert(1);
+    l.insert(2);
+    l.insert(3);
+    ASSERT_EQ(l.search(2), std::optional<int>(2));
+    ASSERT_EQ(l.search(999), std::nullopt);
+}
