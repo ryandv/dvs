@@ -2,6 +2,7 @@
 #define __DOUBLY_LINKED_LIST_H__
 
 #include <memory>
+#include <optional>
 
 template <typename T>
 class DoublyLinkedList {
@@ -29,9 +30,13 @@ class DoublyLinkedList {
         {
         }
 
-        const DoublyLinkedNode& head() const
+        const std::optional<DoublyLinkedNode> head() const
         {
-            return *m_head;
+            if (m_head) {
+                return *m_head;
+            } else {
+                return std::nullopt;
+            }
         }
 
         int size() const
